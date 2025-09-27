@@ -13,17 +13,54 @@ class JeressarHighSchool {
         this.initializeTypewriter();
         this.setupFormValidation();
         this.initializeCarousels();
+        this.setupResponsiveImages();
+        this.setupTouchOptimizations();
     }
 
     setupEventListeners() {
-        // Mobile menu toggle
+        // Enhanced Mobile menu toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const mobileMenu = document.querySelector('.mobile-menu');
         
         if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.preventDefault();
                 mobileMenu.classList.toggle('active');
                 mobileMenuBtn.classList.toggle('active');
+                
+                // Prevent body scroll when menu is open
+                if (mobileMenu.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuBtn.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Close menu on window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuBtn.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Close menu when clicking on menu links
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuBtn.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
             });
         }
 
@@ -333,6 +370,85 @@ class JeressarHighSchool {
                 }).mount();
             }
         }
+    }
+
+    setupResponsiveImages() {
+        // Lazy loading for images
+        const images = document.querySelectorAll('img[data-src]');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        images.forEach(img => imageObserver.observe(img));
+
+        // Responsive image sizing
+        const responsiveImages = document.querySelectorAll('.responsive-img');
+        responsiveImages.forEach(img => {
+            img.addEventListener('load', () => {
+                img.style.opacity = '1';
+            });
+        });
+    }
+
+    setupTouchOptimizations() {
+        // Touch-friendly interactions
+        if ('ontouchstart' in window) {
+            document.body.classList.add('touch-device');
+            
+            // Add touch feedback to buttons
+            const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .premium-card');
+            buttons.forEach(button => {
+                button.addEventListener('touchstart', () => {
+                    button.classList.add('touch-active');
+                });
+                
+                button.addEventListener('touchend', () => {
+                    setTimeout(() => {
+                        button.classList.remove('touch-active');
+                    }, 150);
+                });
+            });
+        }
+
+        // Prevent zoom on double tap for iOS
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Optimize scroll performance
+        let ticking = false;
+        const updateScrollPosition = () => {
+            const scrollTop = window.pageYOffset;
+            const nav = document.querySelector('nav');
+            
+            if (scrollTop > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            ticking = false;
+        };
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollPosition);
+                ticking = true;
+            }
+        });
     }
 
     // Utility functions
