@@ -140,6 +140,435 @@
             border-color: #10b981;
             box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
         }
+        
+        /* Comprehensive Responsive Design */
+        
+        /* Mobile First Approach */
+        @media (max-width: 480px) {
+            /* Typography */
+            .hero-title {
+                font-size: 2.5rem !important;
+                line-height: 1.2;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem !important;
+            }
+            
+            .section-title {
+                font-size: 2rem !important;
+                line-height: 1.3;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem !important;
+            }
+            
+            /* Navigation */
+            .nav-blur {
+                padding: 0 1rem;
+            }
+            
+            .logo-text {
+                font-size: 1rem !important;
+            }
+            
+            .logo-subtitle {
+                font-size: 0.75rem !important;
+            }
+            
+            /* Progress Steps */
+            .progress-step {
+                margin-bottom: 2rem;
+            }
+            
+            .progress-step .step-number {
+                width: 3rem !important;
+                height: 3rem !important;
+                font-size: 1rem !important;
+            }
+            
+            .progress-step h3 {
+                font-size: 1rem !important;
+            }
+            
+            .progress-step p {
+                font-size: 0.875rem !important;
+            }
+            
+            /* Cards */
+            .admission-card {
+                padding: 1.5rem !important;
+                margin-bottom: 1rem;
+            }
+            
+            .admission-card h3 {
+                font-size: 1.25rem !important;
+            }
+            
+            .admission-card h4 {
+                font-size: 1rem !important;
+            }
+            
+            .admission-card ul li {
+                font-size: 0.875rem !important;
+            }
+            
+            /* Fee Cards */
+            .fee-card {
+                margin-bottom: 1.5rem;
+            }
+            
+            .fee-card-header {
+                padding: 1.5rem !important;
+            }
+            
+            .fee-card-header h3 {
+                font-size: 1.25rem !important;
+            }
+            
+            .fee-card-body {
+                padding: 1.5rem !important;
+            }
+            
+            .fee-item {
+                padding: 0.75rem 0 !important;
+                font-size: 0.875rem !important;
+            }
+            
+            .fee-total {
+                font-size: 1.25rem !important;
+            }
+            
+            /* Form */
+            .form-section h3 {
+                font-size: 1.25rem !important;
+            }
+            
+            .form-input {
+                padding: 0.75rem 1rem !important;
+                font-size: 1rem !important;
+            }
+            
+            .form-label {
+                font-size: 0.875rem !important;
+            }
+            
+            .submit-btn {
+                padding: 0.75rem 1.5rem !important;
+                font-size: 1rem !important;
+                width: 100% !important;
+            }
+            
+            /* Contact Cards */
+            .contact-card {
+                margin-bottom: 1.5rem;
+                padding: 1.5rem !important;
+            }
+            
+            .contact-icon {
+                width: 3rem !important;
+                height: 3rem !important;
+            }
+            
+            .contact-icon svg {
+                width: 1.5rem !important;
+                height: 1.5rem !important;
+            }
+            
+            .contact-card h3 {
+                font-size: 1.125rem !important;
+            }
+            
+            .contact-card p {
+                font-size: 0.875rem !important;
+            }
+            
+            /* Footer */
+            .footer-content {
+                padding: 2rem 1rem !important;
+            }
+            
+            .footer-logo {
+                flex-direction: column !important;
+                text-align: center !important;
+            }
+            
+            .footer-logo img {
+                margin-right: 0 !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            .social-links {
+                justify-content: center !important;
+                margin: 1rem 0 !important;
+            }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            /* Tablet Styles */
+            .hero-title {
+                font-size: 3rem !important;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.25rem !important;
+            }
+            
+            .section-title {
+                font-size: 2.5rem !important;
+            }
+            
+            .section-subtitle {
+                font-size: 1.125rem !important;
+            }
+            
+            .progress-step .step-number {
+                width: 4rem !important;
+                height: 4rem !important;
+                font-size: 1.25rem !important;
+            }
+            
+            .admission-card {
+                padding: 2rem !important;
+            }
+            
+            .fee-card-header {
+                padding: 2rem !important;
+            }
+            
+            .fee-card-body {
+                padding: 2rem !important;
+            }
+            
+            .form-input {
+                padding: 1rem 1.25rem !important;
+            }
+            
+            .submit-btn {
+                padding: 1rem 2rem !important;
+                font-size: 1.125rem !important;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            /* Small Desktop */
+            .hero-title {
+                font-size: 4rem !important;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.5rem !important;
+            }
+            
+            .section-title {
+                font-size: 3rem !important;
+            }
+            
+            .section-subtitle {
+                font-size: 1.25rem !important;
+            }
+        }
+        
+        @media (min-width: 1025px) {
+            /* Large Desktop */
+            .hero-title {
+                font-size: 5rem !important;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.75rem !important;
+            }
+            
+            .section-title {
+                font-size: 4rem !important;
+            }
+            
+            .section-subtitle {
+                font-size: 1.5rem !important;
+            }
+        }
+        
+        /* Touch Device Optimizations */
+        .touch-device .form-input {
+            min-height: 44px;
+        }
+        
+        .touch-device .submit-btn {
+            min-height: 44px;
+        }
+        
+        .touch-device .mobile-menu-btn {
+            min-height: 44px;
+            min-width: 44px;
+        }
+        
+        /* Responsive Grid Improvements */
+        @media (max-width: 640px) {
+            .responsive-grid-1 {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .responsive-grid-2 {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .responsive-grid-3 {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .responsive-grid-4 {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        @media (min-width: 641px) and (max-width: 768px) {
+            .responsive-grid-2 {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            .responsive-grid-3 {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            .responsive-grid-4 {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .responsive-grid-3 {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+            
+            .responsive-grid-4 {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        
+        @media (min-width: 1025px) {
+            .responsive-grid-4 {
+                grid-template-columns: repeat(4, 1fr) !important;
+            }
+        }
+        
+        /* Form Responsiveness */
+        @media (max-width: 640px) {
+            .form-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+            
+            .form-grid-2 {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        @media (min-width: 641px) and (max-width: 768px) {
+            .form-grid-2 {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        
+        /* Progress Steps Responsive */
+        @media (max-width: 640px) {
+            .progress-steps-container {
+                flex-direction: column !important;
+                gap: 2rem !important;
+            }
+            
+            .progress-step::after {
+                display: none !important;
+            }
+        }
+        
+        @media (min-width: 641px) and (max-width: 768px) {
+            .progress-steps-container {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 2rem !important;
+            }
+            
+            .progress-step:nth-child(2n)::after {
+                display: none !important;
+            }
+        }
+        
+        /* Fee Cards Responsive */
+        @media (max-width: 640px) {
+            .fee-cards-container {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+        }
+        
+        @media (min-width: 641px) and (max-width: 768px) {
+            .fee-cards-container {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 2rem !important;
+            }
+        }
+        
+        /* Contact Cards Responsive */
+        @media (max-width: 640px) {
+            .contact-cards-container {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+        }
+        
+        @media (min-width: 641px) and (max-width: 768px) {
+            .contact-cards-container {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 2rem !important;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .contact-cards-container {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        }
+        
+        /* Animation and Performance */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .animate-on-scroll.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Focus States for Accessibility */
+        .form-input:focus,
+        .submit-btn:focus,
+        .mobile-menu-btn:focus {
+            outline: 2px solid #0080FF;
+            outline-offset: 2px;
+        }
+        
+        /* Print Styles */
+        @media print {
+            .mobile-menu-btn,
+            .mobile-menu,
+            .submit-btn {
+                display: none !important;
+            }
+            
+            .admission-card,
+            .fee-card {
+                break-inside: avoid;
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -151,8 +580,8 @@
                 <div class="flex items-center">
                     <img src="./resources/school-crest.png" alt="Jeressar High School Crest" class="h-12 w-12 mr-3">
                     <div>
-                        <h1 class="font-poppins font-bold text-xl text-gray-900">Jeressar High School</h1>
-                        <p class="text-sm text-gray-600">God our Hope</p>
+                        <h1 class="font-poppins font-bold text-xl text-gray-900 logo-text">Jeressar High School</h1>
+                        <p class="text-sm text-gray-600 logo-subtitle">God our Hope</p>
                     </div>
                 </div>
                 
@@ -242,8 +671,8 @@
     <!-- Page Header -->
     <section class="pt-32 pb-20 bg-gradient-to-br from-methylene-blue to-deep-navy">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="font-poppins font-bold text-5xl lg:text-6xl text-white mb-6">Admissions</h1>
-            <p class="text-xl text-white/90 max-w-3xl mx-auto">
+            <h1 class="font-poppins font-bold text-5xl lg:text-6xl text-white mb-6 hero-title">Admissions</h1>
+            <p class="text-xl text-white/90 max-w-3xl mx-auto hero-subtitle">
                 Join our community of excellence. Start your journey towards academic success and personal growth at Jeressar High School.
             </p>
         </div>
@@ -253,37 +682,37 @@
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 animate-on-scroll">
-                <h2 class="font-poppins font-bold text-4xl lg:text-5xl text-gray-900 mb-6">
+                <h2 class="font-poppins font-bold text-4xl lg:text-5xl text-gray-900 mb-6 section-title">
                     Admission Process
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto section-subtitle">
                     Our straightforward admission process ensures that every qualified student has the opportunity to join our academic community.
                 </p>
             </div>
             
             <!-- Progress Steps -->
             <div class="mb-16">
-                <div class="grid md:grid-cols-4 gap-8">
+                <div class="grid md:grid-cols-4 gap-8 responsive-grid-4 progress-steps-container">
                     <div class="progress-step text-center">
-                        <div class="w-16 h-16 bg-methylene-blue rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl relative z-10">1</div>
+                        <div class="w-16 h-16 bg-methylene-blue rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl relative z-10 step-number">1</div>
                         <h3 class="font-poppins font-bold text-lg text-gray-900 mb-2">Inquiry & Visit</h3>
                         <p class="text-gray-600 text-sm">Contact us to learn more and schedule a campus tour</p>
                     </div>
                     
                     <div class="progress-step text-center">
-                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-600 font-bold text-xl relative z-10">2</div>
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-600 font-bold text-xl relative z-10 step-number">2</div>
                         <h3 class="font-poppins font-bold text-lg text-gray-900 mb-2">Application</h3>
                         <p class="text-gray-600 text-sm">Complete and submit the application form with required documents</p>
                     </div>
                     
                     <div class="progress-step text-center">
-                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-600 font-bold text-xl relative z-10">3</div>
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-600 font-bold text-xl relative z-10 step-number">3</div>
                         <h3 class="font-poppins font-bold text-lg text-gray-900 mb-2">Assessment</h3>
                         <p class="text-gray-600 text-sm">Entrance examination and interview process</p>
                     </div>
                     
                     <div class="progress-step text-center">
-                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-600 font-bold text-xl relative z-10">4</div>
+                        <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-600 font-bold text-xl relative z-10 step-number">4</div>
                         <h3 class="font-poppins font-bold text-lg text-gray-900 mb-2">Enrollment</h3>
                         <p class="text-gray-600 text-sm">Acceptance letter and completion of enrollment procedures</p>
                     </div>
@@ -291,9 +720,9 @@
             </div>
             
             <!-- Detailed Process -->
-            <div class="grid lg:grid-cols-2 gap-12">
+            <div class="grid lg:grid-cols-2 gap-12 responsive-grid-2">
                 <!-- O-Level Admission -->
-                <div class="bg-gradient-to-br from-methylene-blue to-deep-navy rounded-2xl p-8 text-white card-hover animate-on-scroll">
+                <div class="bg-gradient-to-br from-methylene-blue to-deep-navy rounded-2xl p-8 text-white card-hover animate-on-scroll admission-card">
                     <h3 class="font-poppins font-bold text-2xl mb-6">O-Level Admission</h3>
                     
                     <div class="space-y-6">
@@ -340,7 +769,7 @@
                 </div>
                 
                 <!-- A-Level Admission -->
-                <div class="bg-white border-2 border-gray-100 rounded-2xl p-8 card-hover animate-on-scroll">
+                <div class="bg-white border-2 border-gray-100 rounded-2xl p-8 card-hover animate-on-scroll admission-card">
                     <h3 class="font-poppins font-bold text-2xl text-gray-900 mb-6">A-Level Admission</h3>
                     
                     <div class="space-y-6">
@@ -396,46 +825,46 @@
     <section class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 animate-on-scroll">
-                <h2 class="font-poppins font-bold text-4xl lg:text-5xl text-gray-900 mb-6">
+                <h2 class="font-poppins font-bold text-4xl lg:text-5xl text-gray-900 mb-6 section-title">
                     Fee Structure
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto section-subtitle">
                     Transparent and competitive fee structure with flexible payment options to ensure accessibility to quality education.
                 </p>
             </div>
             
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="grid md:grid-cols-2 gap-8 responsive-grid-2 fee-cards-container">
                 <!-- O-Level Fees -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-on-scroll">
-                    <div class="bg-methylene-blue text-white p-6 text-center">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-on-scroll fee-card">
+                    <div class="bg-methylene-blue text-white p-6 text-center fee-card-header">
                         <h3 class="font-poppins font-bold text-2xl mb-2">O-Level Program</h3>
                         <p class="text-white/90">Senior One to Senior Four</p>
                     </div>
-                    <div class="p-8">
+                    <div class="p-8 fee-card-body">
                         <div class="space-y-4">
-                            <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-100 fee-item">
                                 <span class="text-gray-600">Tuition Fees (Day)</span>
                                 <span class="font-semibold text-gray-900">UGX 850,000</span>
                             </div>
-                            <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-100 fee-item">
                                 <span class="text-gray-600">Tuition Fees (Boarding)</span>
                                 <span class="font-semibold text-gray-900">UGX 1,200,000</span>
                             </div>
-                            <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-100 fee-item">
                                 <span class="text-gray-600">Development Fee</span>
                                 <span class="font-semibold text-gray-900">UGX 150,000</span>
                             </div>
-                            <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-100 fee-item">
                                 <span class="text-gray-600">Library & ICT</span>
                                 <span class="font-semibold text-gray-900">UGX 100,000</span>
                             </div>
-                            <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-100 fee-item">
                                 <span class="text-gray-600">Sports & Activities</span>
                                 <span class="font-semibold text-gray-900">UGX 80,000</span>
                             </div>
                             <div class="flex justify-between items-center py-3">
                                 <span class="font-semibold text-gray-900">Total (Boarding)</span>
-                                <span class="font-bold text-methylene-blue text-xl">UGX 1,530,000</span>
+                                <span class="font-bold text-methylene-blue text-xl fee-total">UGX 1,530,000</span>
                             </div>
                         </div>
                         
@@ -448,36 +877,36 @@
                 </div>
                 
                 <!-- A-Level Fees -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-on-scroll">
-                    <div class="bg-deep-navy text-white p-6 text-center">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-on-scroll fee-card">
+                    <div class="bg-deep-navy text-white p-6 text-center fee-card-header">
                         <h3 class="font-poppins font-bold text-2xl mb-2">A-Level Program</h3>
                         <p class="text-white/90">Senior Five to Senior Six</p>
                     </div>
-                    <div class="p-8">
+                    <div class="p-8 fee-card-body">
                         <div class="space-y-4">
-                            <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-100 fee-item">
                                 <span class="text-gray-600">Tuition Fees (Day)</span>
                                 <span class="font-semibold text-gray-900">UGX 950,000</span>
                             </div>
-                            <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-100 fee-item">
                                 <span class="text-gray-600">Tuition Fees (Boarding)</span>
                                 <span class="font-semibold text-gray-900">UGX 1,350,000</span>
                             </div>
-                            <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-100 fee-item">
                                 <span class="text-gray-600">Laboratory Fee</span>
                                 <span class="font-semibold text-gray-900">UGX 200,000</span>
                             </div>
-                            <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-100 fee-item">
                                 <span class="text-gray-600">Development Fee</span>
                                 <span class="font-semibold text-gray-900">UGX 150,000</span>
                             </div>
-                            <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-100 fee-item">
                                 <span class="text-gray-600">Research & Projects</span>
                                 <span class="font-semibold text-gray-900">UGX 100,000</span>
                             </div>
                             <div class="flex justify-between items-center py-3">
                                 <span class="font-semibold text-gray-900">Total (Boarding)</span>
-                                <span class="font-bold text-methylene-blue text-xl">UGX 1,800,000</span>
+                                <span class="font-bold text-methylene-blue text-xl fee-total">UGX 1,800,000</span>
                             </div>
                         </div>
                         
@@ -496,10 +925,10 @@
     <section class="py-20 bg-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 animate-on-scroll">
-                <h2 class="font-poppins font-bold text-4xl text-gray-900 mb-6">
+                <h2 class="font-poppins font-bold text-4xl text-gray-900 mb-6 section-title">
                     Online Application Form
                 </h2>
-                <p class="text-xl text-gray-600">
+                <p class="text-xl text-gray-600 section-subtitle">
                     Complete the application form below to begin your journey with us.
                 </p>
             </div>
@@ -507,23 +936,23 @@
             <div class="bg-white rounded-2xl shadow-2xl p-8 animate-on-scroll">
                 <form id="admissionForm" class="space-y-8">
                     <!-- Student Information -->
-                    <div>
+                    <div class="form-section">
                         <h3 class="font-poppins font-bold text-2xl text-gray-900 mb-6">Student Information</h3>
-                        <div class="grid md:grid-cols-2 gap-6">
+                        <div class="grid md:grid-cols-2 gap-6 form-grid form-grid-2">
                             <div>
-                                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2 form-label">First Name *</label>
                                 <input type="text" id="firstName" name="firstName" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
                             </div>
                             <div>
-                                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2 form-label">Last Name *</label>
                                 <input type="text" id="lastName" name="lastName" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
                             </div>
                             <div>
-                                <label for="dateOfBirth" class="block text-sm font-medium text-gray-700 mb-2">Date of Birth *</label>
+                                <label for="dateOfBirth" class="block text-sm font-medium text-gray-700 mb-2 form-label">Date of Birth *</label>
                                 <input type="date" id="dateOfBirth" name="dateOfBirth" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
                             </div>
                             <div>
-                                <label for="gender" class="block text-sm font-medium text-gray-700 mb-2">Gender *</label>
+                                <label for="gender" class="block text-sm font-medium text-gray-700 mb-2 form-label">Gender *</label>
                                 <select id="gender" name="gender" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none">
                                     <option value="">Select Gender</option>
                                     <option value="male">Male</option>
@@ -638,7 +1067,7 @@
                     
                     <!-- Submit Button -->
                     <div class="text-center">
-                        <button type="submit" class="bg-methylene-blue text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-deep-navy transition-colors">
+                        <button type="submit" class="bg-methylene-blue text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-deep-navy transition-colors submit-btn">
                             Submit Application
                         </button>
                         <p class="text-sm text-gray-600 mt-4">
@@ -654,17 +1083,17 @@
     <section class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 animate-on-scroll">
-                <h2 class="font-poppins font-bold text-4xl lg:text-5xl text-gray-900 mb-6">
+                <h2 class="font-poppins font-bold text-4xl lg:text-5xl text-gray-900 mb-6 section-title">
                     Need Help with Your Application?
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto section-subtitle">
                     Our admissions team is here to assist you throughout the application process.
                 </p>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center animate-on-scroll">
-                    <div class="w-16 h-16 bg-methylene-blue/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div class="grid md:grid-cols-3 gap-8 responsive-grid-3 contact-cards-container">
+                <div class="text-center animate-on-scroll contact-card">
+                    <div class="w-16 h-16 bg-methylene-blue/10 rounded-full flex items-center justify-center mx-auto mb-4 contact-icon">
                         <svg class="w-8 h-8 text-methylene-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                         </svg>
@@ -674,8 +1103,8 @@
                     <p class="text-methylene-blue font-semibold">+256 772 123 456</p>
                 </div>
                 
-                <div class="text-center animate-on-scroll">
-                    <div class="w-16 h-16 bg-methylene-blue/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="text-center animate-on-scroll contact-card">
+                    <div class="w-16 h-16 bg-methylene-blue/10 rounded-full flex items-center justify-center mx-auto mb-4 contact-icon">
                         <svg class="w-8 h-8 text-methylene-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                         </svg>
@@ -685,8 +1114,8 @@
                     <p class="text-methylene-blue font-semibold">admissions@jeressar.ac.ug</p>
                 </div>
                 
-                <div class="text-center animate-on-scroll">
-                    <div class="w-16 h-16 bg-methylene-blue/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="text-center animate-on-scroll contact-card">
+                    <div class="w-16 h-16 bg-methylene-blue/10 rounded-full flex items-center justify-center mx-auto mb-4 contact-icon">
                         <svg class="w-8 h-8 text-methylene-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -708,9 +1137,9 @@
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 footer-content">
             <div class="text-center">
-                <div class="flex items-center justify-center mb-6">
+                <div class="flex items-center justify-center mb-6 footer-logo">
                     <img src="./resources/school-crest.png" alt="Jeressar High School Crest" class="h-12 w-12 mr-3">
                     <div>
                         <h3 class="font-poppins font-bold text-xl">Jeressar High School</h3>
@@ -720,7 +1149,7 @@
                 <p class="text-gray-400 mb-4">
                     Located in Soroti, Uganda - Shaping tomorrow's leaders through excellence in academics, character, and innovation.
                 </p>
-                <div class="flex justify-center space-x-6 mb-6">
+                <div class="flex justify-center space-x-6 mb-6 social-links">
                     <a href="#" class="text-gray-400 hover:text-white transition-colors">
                         <span class="sr-only">Facebook</span>
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
