@@ -99,6 +99,40 @@
             border: 1px solid #e2e8f0;
         }
         
+        /* Map Responsive Styling */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 12px;
+        }
+        
+        /* Mobile Map Adjustments */
+        @media (max-width: 768px) {
+            .map-container {
+                padding-bottom: 75%; /* 4:3 aspect ratio for mobile */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .map-container {
+                padding-bottom: 100%; /* Square aspect ratio for small mobile */
+            }
+        }
+        
         .contact-card:hover {
             border-color: #0080FF;
             transform: translateY(-4px);
@@ -411,27 +445,20 @@
                 <div class="animate-on-scroll">
                     <h2 class="font-poppins font-bold text-3xl text-gray-900 mb-8">Find Us on Map</h2>
                     <div class="map-container">
-                        <div>
-                            <svg class="w-16 h-16 mx-auto mb-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3301.0680083448233!2d33.630067107022924!3d1.7158148026008446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1779b0c91b0d661f%3A0x4e825bc0e33be1cc!2sJeressar%20High%20School!5e1!3m2!1sen!2sug!4v1758961901001!5m2!1sen!2sug" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="mt-6 text-center">
+                        <p class="text-gray-600 mb-4">
+                            <strong>Jeressar High School</strong><br>
+                            Located in the heart of Soroti town<br>
+                            GPS Coordinates: 1.7147° N, 33.6111° E
+                        </p>
+                        <a href="https://maps.google.com" target="_blank" class="inline-flex items-center bg-methylene-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-deep-navy transition-colors">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                             </svg>
-                            <h3 class="text-2xl font-bold mb-2">Jeressar High School</h3>
-                            <p class="text-white/90 mb-4">Soroti, Uganda</p>
-                            <p class="text-white/80 text-sm">
-                                Located in the heart of Soroti town<br>
-                                Easily accessible by public transport<br>
-                                GPS Coordinates: 1.7147° N, 33.6111° E
-                            </p>
-                            <div class="mt-6">
-                                <a href="https://maps.google.com" target="_blank" class="inline-flex items-center bg-white text-methylene-blue px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                                    </svg>
-                                    Open in Google Maps
-                                </a>
-                            </div>
-                        </div>
+                            Open in Google Maps
+                        </a>
                     </div>
                 </div>
             </div>
