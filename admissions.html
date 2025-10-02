@@ -50,6 +50,29 @@
         .mobile-menu-btn {
             transition: all 0.3s ease;
             position: relative;
+            padding: 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 128, 255, 0.2);
+            min-width: 48px;
+            min-height: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        /* Hide hamburger menu on desktop/tablet (768px and above) */
+        @media (min-width: 768px) {
+            .mobile-menu-btn {
+                display: none !important;
+            }
+        }
+        
+        .mobile-menu-btn:hover {
+            background: rgba(0, 128, 255, 0.1);
+            border-color: rgba(0, 128, 255, 0.4);
         }
         
         .mobile-menu-btn.active span:nth-child(1) {
@@ -572,7 +595,7 @@
                 </div>
                 
                 <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
+                <div class="hidden md:flex items-center space-x-12">
                     <a href="index.html" class="text-gray-700 hover:text-methylene-blue transition-colors">Home</a>
                     <a href="about.html" class="text-gray-700 hover:text-methylene-blue transition-colors">About</a>
                     <a href="academics.html" class="text-gray-700 hover:text-methylene-blue transition-colors">Academics</a>
@@ -583,10 +606,10 @@
                 </div>
                 
                 <!-- Mobile Menu Button -->
-                <button class="md:hidden mobile-menu-btn">
-                    <span class="block w-6 h-0.5 bg-gray-900 mb-1"></span>
-                    <span class="block w-6 h-0.5 bg-gray-900 mb-1"></span>
-                    <span class="block w-6 h-0.5 bg-gray-900"></span>
+                <button class="md:hidden mobile-menu-btn" aria-label="Toggle mobile menu">
+                    <span class="block w-6 h-1 bg-gray-900 mb-1.5 rounded transition-all duration-300"></span>
+                    <span class="block w-6 h-1 bg-gray-900 mb-1.5 rounded transition-all duration-300"></span>
+                    <span class="block w-6 h-1 bg-gray-900 rounded transition-all duration-300"></span>
                 </button>
             </div>
             
@@ -655,17 +678,17 @@
     </nav>
 
     <!-- Page Header -->
-    <section class="pt-32 pb-20 bg-gradient-to-br from-methylene-blue to-deep-navy">
+    <section class="pt-40 pb-32 bg-gradient-to-br from-methylene-blue to-deep-navy">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="font-poppins font-bold text-5xl lg:text-6xl text-white mb-6 hero-title">Admissions</h2>
-            <p class="text-xl text-white/90 max-w-3xl mx-auto hero-subtitle">
+            <h2 class="font-poppins font-bold text-5xl lg:text-6xl text-white mb-8 hero-title">Admissions</h2>
+            <p class="text-xl text-white/90 max-w-3xl mx-auto hero-subtitle leading-relaxed">
                 Join our community of excellence. Start your journey towards academic success and personal growth at Jeressar High School.
             </p>
         </div>
     </section>
 
     <!-- Admission Process -->
-    <section class="py-20 bg-white">
+    <section class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 animate-on-scroll">
                 <h2 class="font-poppins font-bold text-4xl lg:text-5xl text-gray-900 mb-6 section-title">
@@ -708,48 +731,48 @@
             <!-- Detailed Process -->
             <div class="grid lg:grid-cols-2 gap-12 responsive-grid-2">
                 <!-- O-Level Admission -->
-                <div class="bg-gradient-to-br from-methylene-blue to-deep-navy rounded-2xl p-8 text-white card-hover animate-on-scroll admission-card">
-                    <h3 class="font-poppins font-bold text-2xl mb-6">O-Level Admission</h3>
+                <div class="bg-gradient-to-br from-methylene-blue to-deep-navy rounded-2xl p-8 text-white card-hover animate-on-scroll admission-card shadow-xl">
+                    <h3 class="font-poppins font-bold text-2xl mb-6 text-white">O-Level Admission</h3>
                     
                     <div class="space-y-6">
                         <div>
-                            <h4 class="font-semibold text-white mb-3">Entry Requirements</h4>
-                            <ul class="space-y-2 text-white/90">
-                                <li class="flex items-center">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <h4 class="font-semibold text-white mb-3 text-lg">Entry Requirements</h4>
+                            <ul class="space-y-3 text-white">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 mr-3 mt-0.5 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Primary Leaving Examination (PLE) certificate
+                                    <span class="text-white font-medium">Primary Leaving Examination (PLE) certificate</span>
                                 </li>
-                                <li class="flex items-center">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 mr-3 mt-0.5 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Minimum aggregate of 28 points
+                                    <span class="text-white font-medium">Minimum aggregate of 28 points</span>
                                 </li>
-                                <li class="flex items-center">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 mr-3 mt-0.5 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Birth certificate and passport photos
+                                    <span class="text-white font-medium">Birth certificate and passport photos</span>
                                 </li>
-                                <li class="flex items-center">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 mr-3 mt-0.5 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                     </svg>
-                                    Recommendation letter from primary school
+                                    <span class="text-white font-medium">Recommendation letter from primary school</span>
                                 </li>
                             </ul>
                         </div>
                         
                         <div>
-                            <h4 class="font-semibold text-white mb-3">Age Requirements</h4>
-                            <p class="text-white/90">Students should be between 12-14 years old at the time of admission.</p>
+                            <h4 class="font-semibold text-white mb-3 text-lg">Age Requirements</h4>
+                            <p class="text-white font-medium leading-relaxed">Students should be between 12-14 years old at the time of admission.</p>
                         </div>
                         
                         <div>
-                            <h4 class="font-semibold text-white mb-3">Application Timeline</h4>
-                            <p class="text-white/90">Applications open in January and close in March for the academic year starting in February.</p>
+                            <h4 class="font-semibold text-white mb-3 text-lg">Application Timeline</h4>
+                            <p class="text-white font-medium leading-relaxed">Applications open in January and close in March for the academic year starting in February.</p>
                         </div>
                     </div>
                 </div>
@@ -808,7 +831,7 @@
     </section>
 
     <!-- Fee Structure -->
-    <section class="py-20 bg-gray-50">
+    <section class="py-24 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 animate-on-scroll">
                 <h2 class="font-poppins font-bold text-4xl lg:text-5xl text-gray-900 mb-6 section-title">
@@ -908,7 +931,7 @@
     </section>
 
     <!-- Application Form -->
-    <section class="py-20 bg-white">
+    <section class="py-24 bg-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 animate-on-scroll">
                 <h2 class="font-poppins font-bold text-4xl text-gray-900 mb-6 section-title">
@@ -1066,7 +1089,7 @@
     </section>
 
     <!-- Contact Information -->
-    <section class="py-20 bg-gray-50">
+    <section class="py-24 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 animate-on-scroll">
                 <h2 class="font-poppins font-bold text-4xl lg:text-5xl text-gray-900 mb-6 section-title">
@@ -1113,7 +1136,7 @@
                 </div>
             </div>
             
-            <div class="text-center mt-12">
+            <div class="text-center mt-20">
                 <a href="contact.html" class="bg-methylene-blue text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-deep-navy transition-colors">
                     Get Directions
                 </a>
@@ -1163,7 +1186,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="supabase-config.js"></script>
+    <script src="supabase-client.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

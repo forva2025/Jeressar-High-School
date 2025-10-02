@@ -287,15 +287,33 @@ class JeressarHighSchool {
         if (isFormValid) {
             // Show loading state
             const originalBtnText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span class="loading-spinner"></span> Sending...';
+            const loadingText = form.id === 'contactForm' ? 'Sending...' : 'Submitting Application...';
+            submitBtn.innerHTML = `<span class="loading-spinner"></span> ${loadingText}`;
             submitBtn.disabled = true;
 
             try {
+                // Wait for Supabase client to be ready
+                if (!window.supabaseClient || !window.supabaseClient.isInitialized) {
+                    // Wait up to 5 seconds for initialization
+                    let attempts = 0;
+                    while ((!window.supabaseClient || !window.supabaseClient.isInitialized) && attempts < 50) {
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                        attempts++;
+                    }
+                    
+                    if (!window.supabaseClient || !window.supabaseClient.isInitialized) {
+                        throw new Error('Database connection not available. Please refresh the page and try again.');
+                    }
+                }
+
                 // Convert FormData to object
                 const formDataObj = {};
                 for (let [key, value] of formData.entries()) {
                     formDataObj[key] = value;
                 }
+
+                console.log('📝 Form submission started for:', form.id);
+                console.log('📊 Form data:', formDataObj);
 
                 let result;
                 // Determine form type and submit to appropriate Supabase table
@@ -304,18 +322,38 @@ class JeressarHighSchool {
                 } else if (form.id === 'admissionForm') {
                     result = await window.supabaseClient.submitAdmissionForm(formDataObj);
                 } else {
-                    throw new Error('Unknown form type');
+                    throw new Error('Unknown form type: ' + form.id);
                 }
 
                 if (result.success) {
+                    console.log('✅ Form submitted successfully:', result);
                     this.showFormSuccess(form, result);
                     form.reset();
+                    
+                    // Remove any existing error messages
+                    const existingErrors = form.querySelectorAll('.form-error');
+                    existingErrors.forEach(error => error.remove());
                 } else {
-                    throw new Error(result.error || 'Submission failed');
+                    console.error('❌ Form submission failed:', result);
+                    throw new Error(result.userMessage || result.error || 'Submission failed');
                 }
             } catch (error) {
-                console.error('Form submission error:', error);
-                this.showFormError(form, 'There was an error submitting your form. Please try again.');
+                console.error('❌ Form submission error:', error);
+                
+                let errorMessage = 'There was an error submitting your form. Please try again.';
+                
+                // Show user-friendly error messages
+                if (error.message.includes('Database connection not available')) {
+                    errorMessage = error.message;
+                } else if (error.message.includes('Missing required field')) {
+                    errorMessage = error.message;
+                } else if (error.message.includes('row-level security')) {
+                    errorMessage = 'Database access error. Please contact support or try again later.';
+                } else if (error.message.includes('declaration')) {
+                    errorMessage = 'Please accept the declaration to submit your application.';
+                }
+                
+                this.showFormError(form, errorMessage);
             } finally {
                 // Reset button state
                 submitBtn.innerHTML = originalBtnText;
@@ -327,39 +365,52 @@ class JeressarHighSchool {
     }
 
     showFormSuccess(form, result) {
+        // Remove any existing success/error messages
+        const existingMessages = form.querySelectorAll('.form-success, .form-error');
+        existingMessages.forEach(msg => msg.remove());
+        
         const successMessage = document.createElement('div');
         successMessage.className = 'form-success';
         
         let successContent;
         if (form.id === 'contactForm') {
             successContent = `
-                <div class="success-icon">✓</div>
+                <div class="success-icon">✅</div>
                 <h3>Message Sent Successfully!</h3>
-                <p>Thank you for contacting us. We'll get back to you soon.</p>
+                <p>${result.message || 'Thank you for contacting us. We\'ll get back to you soon.'}</p>
+                <p class="text-sm mt-2">Your message has been received and will be reviewed by our team.</p>
             `;
         } else if (form.id === 'admissionForm') {
             const applicationId = result.applicationId || 'N/A';
             successContent = `
-                <div class="success-icon">✓</div>
+                <div class="success-icon">🎓</div>
                 <h3>Application Submitted Successfully!</h3>
-                <p><strong>Application ID:</strong> ${applicationId}</p>
-                <p>Thank you for applying to Jeressar High School. You will receive a confirmation email within 24 hours with further instructions.</p>
-                <p class="text-sm mt-2">Please save your Application ID for future reference.</p>
+                <p><strong>Your Application ID:</strong> <span style="background: #e0f2fe; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-weight: bold; color: #0277bd;">${applicationId}</span></p>
+                <p>${result.message || 'Thank you for applying to Jeressar High School.'}</p>
+                <p class="text-sm mt-2"><strong>Important:</strong> Please save your Application ID for future reference and communication.</p>
+                <p class="text-sm">You will receive a confirmation email within 24 hours with further instructions.</p>
             `;
         } else {
             successContent = `
-                <div class="success-icon">✓</div>
+                <div class="success-icon">✅</div>
                 <h3>Submission Successful!</h3>
-                <p>Thank you for your submission. We'll process it shortly.</p>
+                <p>${result.message || 'Thank you for your submission. We\'ll process it shortly.'}</p>
             `;
         }
         
         successMessage.innerHTML = successContent;
         form.appendChild(successMessage);
         
+        // Scroll success message into view
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Auto-remove after delay (longer for admission form)
+        const timeout = form.id === 'admissionForm' ? 15000 : 8000;
         setTimeout(() => {
-            successMessage.remove();
-        }, 8000); // Longer timeout for admission form to read application ID
+            if (successMessage.parentNode) {
+                successMessage.remove();
+            }
+        }, timeout);
     }
 
     showFormError(form, message) {

@@ -50,6 +50,29 @@
         .mobile-menu-btn {
             transition: all 0.3s ease;
             position: relative;
+            padding: 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 128, 255, 0.2);
+            min-width: 48px;
+            min-height: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        /* Hide hamburger menu on desktop/tablet (768px and above) */
+        @media (min-width: 768px) {
+            .mobile-menu-btn {
+                display: none !important;
+            }
+        }
+        
+        .mobile-menu-btn:hover {
+            background: rgba(0, 128, 255, 0.1);
+            border-color: rgba(0, 128, 255, 0.4);
         }
         
         .mobile-menu-btn.active span:nth-child(1) {
@@ -171,7 +194,7 @@
                 </div>
                 
                 <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
+                <div class="hidden md:flex items-center space-x-12">
                     <a href="index.html" class="text-gray-700 hover:text-methylene-blue transition-colors">Home</a>
                     <a href="about.html" class="text-gray-700 hover:text-methylene-blue transition-colors">About</a>
                     <a href="academics.html" class="text-gray-700 hover:text-methylene-blue transition-colors">Academics</a>
@@ -182,10 +205,10 @@
                 </div>
                 
                 <!-- Mobile Menu Button -->
-                <button class="md:hidden mobile-menu-btn">
-                    <span class="block w-6 h-0.5 bg-gray-900 mb-1"></span>
-                    <span class="block w-6 h-0.5 bg-gray-900 mb-1"></span>
-                    <span class="block w-6 h-0.5 bg-gray-900"></span>
+                <button class="md:hidden mobile-menu-btn" aria-label="Toggle mobile menu">
+                    <span class="block w-6 h-1 bg-gray-900 mb-1.5 rounded transition-all duration-300"></span>
+                    <span class="block w-6 h-1 bg-gray-900 mb-1.5 rounded transition-all duration-300"></span>
+                    <span class="block w-6 h-1 bg-gray-900 rounded transition-all duration-300"></span>
                 </button>
             </div>
             
@@ -254,17 +277,17 @@
     </nav>
 
     <!-- Page Header -->
-    <section class="pt-32 pb-20 bg-gradient-to-br from-methylene-blue to-deep-navy">
+    <section class="pt-40 pb-32 bg-gradient-to-br from-methylene-blue to-deep-navy">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="font-poppins font-bold text-5xl lg:text-6xl text-white mb-6">Contact Us</h1>
-            <p class="text-xl text-white/90 max-w-3xl mx-auto">
+            <h1 class="font-poppins font-bold text-5xl lg:text-6xl text-white mb-8">Contact Us</h1>
+            <p class="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
                 Get in touch with us for inquiries, visits, or any questions about our school. We're here to help you.
             </p>
         </div>
     </section>
 
     <!-- Contact Information -->
-    <section class="py-20 bg-white">
+    <section class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 animate-on-scroll">
                 <h2 class="font-poppins font-bold text-4xl lg:text-5xl text-gray-900 mb-6">
@@ -374,7 +397,7 @@
     </section>
 
     <!-- Contact Form & Map -->
-    <section class="py-20 bg-gray-50">
+    <section class="py-24 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-12">
                 <!-- Contact Form -->
@@ -510,7 +533,7 @@
     </section>
 
     <!-- Call to Action -->
-    <section class="py-20 bg-methylene-blue">
+    <section class="py-24 bg-methylene-blue">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="animate-on-scroll">
                 <h2 class="font-poppins font-bold text-4xl lg:text-5xl text-white mb-6">
@@ -573,7 +596,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="supabase-config.js"></script>
+    <script src="supabase-client.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

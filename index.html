@@ -318,6 +318,29 @@
         .mobile-menu-btn {
             transition: all 0.3s ease;
             position: relative;
+            padding: 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 128, 255, 0.2);
+            min-width: 48px;
+            min-height: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        /* Hide hamburger menu on desktop/tablet (768px and above) */
+        @media (min-width: 768px) {
+            .mobile-menu-btn {
+                display: none !important;
+            }
+        }
+        
+        .mobile-menu-btn:hover {
+            background: rgba(0, 128, 255, 0.1);
+            border-color: rgba(0, 128, 255, 0.4);
         }
         
         .mobile-menu-btn.active span:nth-child(1) {
@@ -503,7 +526,7 @@
                 </div>
                 
                 <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
+                <div class="hidden md:flex items-center space-x-12">
                     <a href="index.html" class="text-methylene-blue font-medium border-b-2 border-methylene-blue pb-1">Home</a>
                     <a href="about.html" class="text-gray-700 hover:text-methylene-blue transition-colors">About</a>
                     <a href="academics.html" class="text-gray-700 hover:text-methylene-blue transition-colors">Academics</a>
@@ -514,10 +537,10 @@
                 </div>
                 
                 <!-- Mobile Menu Button -->
-                <button class="md:hidden mobile-menu-btn">
-                    <span class="block w-6 h-0.5 bg-gray-900 mb-1"></span>
-                    <span class="block w-6 h-0.5 bg-gray-900 mb-1"></span>
-                    <span class="block w-6 h-0.5 bg-gray-900"></span>
+                <button class="md:hidden mobile-menu-btn" aria-label="Toggle mobile menu">
+                    <span class="block w-6 h-1 bg-gray-900 mb-1.5 rounded transition-all duration-300"></span>
+                    <span class="block w-6 h-1 bg-gray-900 mb-1.5 rounded transition-all duration-300"></span>
+                    <span class="block w-6 h-1 bg-gray-900 rounded transition-all duration-300"></span>
                 </button>
             </div>
             
