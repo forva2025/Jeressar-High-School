@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Jeressar High School</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'methylene-blue': '#0080FF',
+                        'deep-navy': '#003366'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .table-container {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-new { background-color: #dbeafe; color: #1e40af; }
+        .status-pending_review { background-color: #fef3c7; color: #92400e; }
+        .status-under_review { background-color: #e0e7ff; color: #3730a3; }
+        .status-approved { background-color: #d1fae5; color: #065f46; }
+        .status-rejected { background-color: #fee2e2; color: #991b1b; }
+        .status-resolved { background-color: #d1fae5; color: #065f46; }
+        .status-in_progress { background-color: #fef3c7; color: #92400e; }
+        .status-closed { background-color: #f3f4f6; color: #374151; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-semibold text-gray-900">Jeressar High School - Admin Dashboard</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="refreshBtn" class="bg-methylene-blue text-white px-4 py-2 rounded-lg hover:bg-deep-navy transition-colors">
+                        Refresh Data
+                    </button>
+                    <button id="logoutBtn" class="text-gray-600 hover:text-gray-900">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Login Form (shown when not authenticated) -->
+        <div id="loginForm" class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold text-center mb-6">Admin Login</h2>
+            <form id="authForm">
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-methylene-blue">
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <input type="password" id="password" name="password" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-methylene-blue">
+                </div>
+                <button type="submit" class="w-full bg-methylene-blue text-white py-2 rounded-lg hover:bg-deep-navy transition-colors">
+                    Login
+                </button>
+            </form>
+            <div id="loginError" class="mt-4 text-red-600 text-sm text-center hidden"></div>
+        </div>
+
+        <!-- Dashboard Content (shown when authenticated) -->
+        <div id="dashboardContent" class="hidden">
+            <!-- Statistics Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-blue-100 rounded-lg">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Total Contacts</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="totalContacts">-</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-green-100 rounded-lg">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Total Applications</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="totalApplications">-</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-yellow-100 rounded-lg">
+                            <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Pending Review</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="pendingApplications">-</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-red-100 rounded-lg">
+                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">New Contacts</p>
+                            <p class="text-2xl font-semibold text-gray-900" id="newContacts">-</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="bg-white rounded-lg shadow">
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex">
+                        <button id="contactsTab" class="tab-button active py-4 px-6 border-b-2 border-methylene-blue text-methylene-blue font-medium">
+                            Contact Submissions
+                        </button>
+                        <button id="applicationsTab" class="tab-button py-4 px-6 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium">
+                            Admission Applications
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- Contact Submissions Table -->
+                <div id="contactsContent" class="tab-content p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">Contact Submissions</h3>
+                        <button id="exportContactsBtn" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
+                            Export CSV
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50 sticky top-0">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subject</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contactsTableBody" class="bg-white divide-y divide-gray-200">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Admission Applications Table -->
+                <div id="applicationsContent" class="tab-content p-6 hidden">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">Admission Applications</h3>
+                        <button id="exportApplicationsBtn" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
+                            Export CSV
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50 sticky top-0">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Application ID</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Student Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Program</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="applicationsTableBody" class="bg-white divide-y divide-gray-200">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="supabase-config.js"></script>
+    <script>
+        class AdminDashboard {
+            constructor() {
+                this.currentUser = null;
+                this.init();
+            }
+
+            async init() {
+                // Wait for Supabase to initialize
+                await new Promise(resolve => {
+                    const checkSupabase = () => {
+                        if (window.supabaseClient && window.supabaseClient.supabase) {
+                            resolve();
+                        } else {
+                            setTimeout(checkSupabase, 100);
+                        }
+                    };
+                    checkSupabase();
+                });
+
+                this.setupEventListeners();
+                await this.checkAuthStatus();
+            }
+
+            setupEventListeners() {
+                // Auth form
+                document.getElementById('authForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleLogin();
+                });
+
+                // Logout button
+                document.getElementById('logoutBtn').addEventListener('click', () => {
+                    this.handleLogout();
+                });
+
+                // Refresh button
+                document.getElementById('refreshBtn').addEventListener('click', () => {
+                    this.loadDashboardData();
+                });
+
+                // Tab switching
+                document.getElementById('contactsTab').addEventListener('click', () => {
+                    this.switchTab('contacts');
+                });
+                document.getElementById('applicationsTab').addEventListener('click', () => {
+                    this.switchTab('applications');
+                });
+
+                // Export buttons
+                document.getElementById('exportContactsBtn').addEventListener('click', () => {
+                    this.exportData('contacts');
+                });
+                document.getElementById('exportApplicationsBtn').addEventListener('click', () => {
+                    this.exportData('applications');
+                });
+            }
+
+            async checkAuthStatus() {
+                try {
+                    const { data: { user } } = await window.supabaseClient.supabase.auth.getUser();
+                    if (user) {
+                        this.currentUser = user;
+                        this.showDashboard();
+                        await this.loadDashboardData();
+                    } else {
+                        this.showLogin();
+                    }
+                } catch (error) {
+                    console.error('Auth check error:', error);
+                    this.showLogin();
+                }
+            }
+
+            async handleLogin() {
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const errorDiv = document.getElementById('loginError');
+
+                try {
+                    const { data, error } = await window.supabaseClient.supabase.auth.signInWithPassword({
+                        email,
+                        password
+                    });
+
+                    if (error) throw error;
+
+                    this.currentUser = data.user;
+                    this.showDashboard();
+                    await this.loadDashboardData();
+                    errorDiv.classList.add('hidden');
+                } catch (error) {
+                    console.error('Login error:', error);
+                    errorDiv.textContent = error.message;
+                    errorDiv.classList.remove('hidden');
+                }
+            }
+
+            async handleLogout() {
+                try {
+                    await window.supabaseClient.supabase.auth.signOut();
+                    this.currentUser = null;
+                    this.showLogin();
+                } catch (error) {
+                    console.error('Logout error:', error);
+                }
+            }
+
+            showLogin() {
+                document.getElementById('loginForm').classList.remove('hidden');
+                document.getElementById('dashboardContent').classList.add('hidden');
+            }
+
+            showDashboard() {
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('dashboardContent').classList.remove('hidden');
+            }
+
+            async loadDashboardData() {
+                try {
+                    // Load statistics
+                    await this.loadStatistics();
+                    
+                    // Load table data
+                    await this.loadContactSubmissions();
+                    await this.loadAdmissionApplications();
+                } catch (error) {
+                    console.error('Error loading dashboard data:', error);
+                }
+            }
+
+            async loadStatistics() {
+                try {
+                    const contacts = await window.supabaseClient.getContactSubmissions(1000);
+                    const applications = await window.supabaseClient.getAdmissionApplications(1000);
+
+                    if (contacts.success) {
+                        const contactData = contacts.data;
+                        document.getElementById('totalContacts').textContent = contactData.length;
+                        document.getElementById('newContacts').textContent = 
+                            contactData.filter(c => c.status === 'new').length;
+                    }
+
+                    if (applications.success) {
+                        const appData = applications.data;
+                        document.getElementById('totalApplications').textContent = appData.length;
+                        document.getElementById('pendingApplications').textContent = 
+                            appData.filter(a => a.status === 'pending_review').length;
+                    }
+                } catch (error) {
+                    console.error('Error loading statistics:', error);
+                }
+            }
+
+            async loadContactSubmissions() {
+                try {
+                    const result = await window.supabaseClient.getContactSubmissions(100);
+                    if (result.success) {
+                        this.renderContactsTable(result.data);
+                    }
+                } catch (error) {
+                    console.error('Error loading contacts:', error);
+                }
+            }
+
+            async loadAdmissionApplications() {
+                try {
+                    const result = await window.supabaseClient.getAdmissionApplications(100);
+                    if (result.success) {
+                        this.renderApplicationsTable(result.data);
+                    }
+                } catch (error) {
+                    console.error('Error loading applications:', error);
+                }
+            }
+
+            renderContactsTable(contacts) {
+                const tbody = document.getElementById('contactsTableBody');
+                tbody.innerHTML = contacts.map(contact => `
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ${contact.first_name} ${contact.last_name}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ${contact.email}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ${contact.subject}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="status-badge status-${contact.status}">${contact.status}</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ${new Date(contact.submitted_at).toLocaleDateString()}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            <select onchange="updateContactStatus('${contact.id}', this.value)" class="border rounded px-2 py-1">
+                                <option value="new" ${contact.status === 'new' ? 'selected' : ''}>New</option>
+                                <option value="in_progress" ${contact.status === 'in_progress' ? 'selected' : ''}>In Progress</option>
+                                <option value="resolved" ${contact.status === 'resolved' ? 'selected' : ''}>Resolved</option>
+                                <option value="closed" ${contact.status === 'closed' ? 'selected' : ''}>Closed</option>
+                            </select>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+
+            renderApplicationsTable(applications) {
+                const tbody = document.getElementById('applicationsTableBody');
+                tbody.innerHTML = applications.map(app => `
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            ${app.application_id}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ${app.first_name} ${app.last_name}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ${app.email}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ${app.program.toUpperCase()}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="status-badge status-${app.status}">${app.status}</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ${new Date(app.submitted_at).toLocaleDateString()}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                            <select onchange="updateApplicationStatus('${app.id}', this.value)" class="border rounded px-2 py-1">
+                                <option value="pending_review" ${app.status === 'pending_review' ? 'selected' : ''}>Pending Review</option>
+                                <option value="under_review" ${app.status === 'under_review' ? 'selected' : ''}>Under Review</option>
+                                <option value="approved" ${app.status === 'approved' ? 'selected' : ''}>Approved</option>
+                                <option value="rejected" ${app.status === 'rejected' ? 'selected' : ''}>Rejected</option>
+                                <option value="waitlisted" ${app.status === 'waitlisted' ? 'selected' : ''}>Waitlisted</option>
+                            </select>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+
+            switchTab(tab) {
+                // Update tab buttons
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active', 'border-methylene-blue', 'text-methylene-blue');
+                    btn.classList.add('border-transparent', 'text-gray-500');
+                });
+
+                // Update tab content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.add('hidden');
+                });
+
+                if (tab === 'contacts') {
+                    document.getElementById('contactsTab').classList.add('active', 'border-methylene-blue', 'text-methylene-blue');
+                    document.getElementById('contactsTab').classList.remove('border-transparent', 'text-gray-500');
+                    document.getElementById('contactsContent').classList.remove('hidden');
+                } else if (tab === 'applications') {
+                    document.getElementById('applicationsTab').classList.add('active', 'border-methylene-blue', 'text-methylene-blue');
+                    document.getElementById('applicationsTab').classList.remove('border-transparent', 'text-gray-500');
+                    document.getElementById('applicationsContent').classList.remove('hidden');
+                }
+            }
+
+            exportData(type) {
+                // This is a basic CSV export - you can enhance this
+                if (type === 'contacts') {
+                    window.open(`data:text/csv;charset=utf-8,Contact submissions export would go here`);
+                } else if (type === 'applications') {
+                    window.open(`data:text/csv;charset=utf-8,Application data export would go here`);
+                }
+            }
+        }
+
+        // Global functions for status updates
+        async function updateContactStatus(id, status) {
+            try {
+                await window.supabaseClient.updateContactStatus(id, status);
+                // Refresh the data
+                dashboard.loadContactSubmissions();
+                dashboard.loadStatistics();
+            } catch (error) {
+                console.error('Error updating contact status:', error);
+                alert('Error updating status');
+            }
+        }
+
+        async function updateApplicationStatus(id, status) {
+            try {
+                await window.supabaseClient.updateApplicationStatus(id, status);
+                // Refresh the data
+                dashboard.loadAdmissionApplications();
+                dashboard.loadStatistics();
+            } catch (error) {
+                console.error('Error updating application status:', error);
+                alert('Error updating status');
+            }
+        }
+
+        // Initialize dashboard
+        const dashboard = new AdminDashboard();
+    </script>
+</body>
+</html>

@@ -272,7 +272,7 @@ class JeressarHighSchool {
         }
     }
 
-    handleFormSubmission(form) {
+    async handleFormSubmission(form) {
         const formData = new FormData(form);
         const submitBtn = form.querySelector('button[type="submit"]');
         
@@ -286,35 +286,80 @@ class JeressarHighSchool {
 
         if (isFormValid) {
             // Show loading state
+            const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<span class="loading-spinner"></span> Sending...';
             submitBtn.disabled = true;
 
-            // Simulate form submission (replace with actual endpoint)
-            setTimeout(() => {
-                this.showFormSuccess(form);
-                form.reset();
-                submitBtn.innerHTML = 'Send Message';
+            try {
+                // Convert FormData to object
+                const formDataObj = {};
+                for (let [key, value] of formData.entries()) {
+                    formDataObj[key] = value;
+                }
+
+                let result;
+                // Determine form type and submit to appropriate Supabase table
+                if (form.id === 'contactForm') {
+                    result = await window.supabaseClient.submitContactForm(formDataObj);
+                } else if (form.id === 'admissionForm') {
+                    result = await window.supabaseClient.submitAdmissionForm(formDataObj);
+                } else {
+                    throw new Error('Unknown form type');
+                }
+
+                if (result.success) {
+                    this.showFormSuccess(form, result);
+                    form.reset();
+                } else {
+                    throw new Error(result.error || 'Submission failed');
+                }
+            } catch (error) {
+                console.error('Form submission error:', error);
+                this.showFormError(form, 'There was an error submitting your form. Please try again.');
+            } finally {
+                // Reset button state
+                submitBtn.innerHTML = originalBtnText;
                 submitBtn.disabled = false;
-            }, 2000);
+            }
         } else {
             this.showFormError(form, 'Please correct the errors above');
         }
     }
 
-    showFormSuccess(form) {
+    showFormSuccess(form, result) {
         const successMessage = document.createElement('div');
         successMessage.className = 'form-success';
-        successMessage.innerHTML = `
-            <div class="success-icon">✓</div>
-            <h3>Message Sent Successfully!</h3>
-            <p>Thank you for contacting us. We'll get back to you soon.</p>
-        `;
         
+        let successContent;
+        if (form.id === 'contactForm') {
+            successContent = `
+                <div class="success-icon">✓</div>
+                <h3>Message Sent Successfully!</h3>
+                <p>Thank you for contacting us. We'll get back to you soon.</p>
+            `;
+        } else if (form.id === 'admissionForm') {
+            const applicationId = result.applicationId || 'N/A';
+            successContent = `
+                <div class="success-icon">✓</div>
+                <h3>Application Submitted Successfully!</h3>
+                <p><strong>Application ID:</strong> ${applicationId}</p>
+                <p>Thank you for applying to Jeressar High School. You will receive a confirmation email within 24 hours with further instructions.</p>
+                <p class="text-sm mt-2">Please save your Application ID for future reference.</p>
+            `;
+        } else {
+            successContent = `
+                <div class="success-icon">✓</div>
+                <h3>Submission Successful!</h3>
+                <p>Thank you for your submission. We'll process it shortly.</p>
+            `;
+        }
+        
+        successMessage.innerHTML = successContent;
         form.appendChild(successMessage);
         
         setTimeout(() => {
             successMessage.remove();
-        }, 5000);
+        }, 8000); // Longer timeout for admission form to read application ID
     }
 
     showFormError(form, message) {
